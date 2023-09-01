@@ -1,0 +1,40 @@
+<div class="container-tabuleiro">
+    <div *ngFor="let posicao of posicoes; let i = index"
+        class="posicao" 
+        (click)="jogadas(i)">
+        {{ posicao }}
+    </div>
+</div>
+
+<ng-container *ngIf="fimDaPartida && vencedor != '👵'">
+    <div class="linha" 
+        [ngClass]="{
+            'horizontal-1' : posicaoLinha == 'horizontal-1', 
+            'horizontal-2' : posicaoLinha == 'horizontal-2',
+            'horizontal-3' : posicaoLinha == 'horizontal-3',
+            'vertical-1' : posicaoLinha == 'vertical-1',
+            'vertical-2' : posicaoLinha == 'vertical-2',
+            'vertical-3' : posicaoLinha == 'vertical-3',
+            'diagonal-1' : posicaoLinha == 'diagonal-1',
+            'diagonal-2' : posicaoLinha == 'diagonal-2'
+        }"   >
+    </div>
+</ng-container>
+
+<ng-container *ngIf="fimDaPartida">
+    <div class="container-vencedor">
+        <ng-container *ngIf="fimDaPartida && vencedor != '👵'; else deuVelha">
+            <p class="titulo-vencedor">Vencedor da partida:</p>
+        </ng-container>
+        <ng-template #deuVelha>
+            <p class="titulo-vencedor">Deu véiaaa!</p>
+        </ng-template>
+        <p class="icone-vencedor">{{ vencedor }}</p>
+    </div>
+</ng-container>
+
+<div class="container-acao">
+    <button class="btn-reiniciar" type="button" (click)="reiniciar()">
+        <img src="https://icon-library.com/images/refresh-icon-white/refresh-icon-white-1.jpg" alt="" srcset="">
+    </button>
+</div>
